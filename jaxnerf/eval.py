@@ -31,6 +31,8 @@ from jaxnerf.nerf import datasets
 from jaxnerf.nerf import models
 from jaxnerf.nerf import utils
 
+import optax # added
+
 FLAGS = flags.FLAGS
 
 utils.define_flags()
@@ -51,7 +53,8 @@ def main(unused_argv):
   dataset = datasets.get_dataset("test", FLAGS)
   rng, key = random.split(rng)
   model, init_variables = models.get_model(key, dataset.peek(), FLAGS)
-  optimizer = flax.optim.Adam(FLAGS.lr_init).create(init_variables)
+  #optimizer = flax.optim.Adam(FLAGS.lr_init).create(init_variables)
+  optimizer = optax.Adam(FLAGS.lr_init).create(init_variables)
   state = utils.TrainState(optimizer=optimizer)
   del optimizer, init_variables
 
