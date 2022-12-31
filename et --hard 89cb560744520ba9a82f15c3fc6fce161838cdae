@@ -1,0 +1,191 @@
+[33mcommit 1a82a8259692925d8200d8a5e362c6de45fd2141[m[33m ([m[1;36mHEAD -> [m[1;32mmaster[m[33m, [m[1;31morigin/master[m[33m)[m
+Author: barikata1984 <franche1984@gmail.com>
+Date:   Thu Dec 29 13:16:24 2022 -0500
+
+    eval.py: 34 add optax impoted, 56 disable flax.optim, 57 enable optax
+
+M	jaxnerf/eval.py
+
+[33mcommit 89cb560744520ba9a82f15c3fc6fce161838cdae[m
+Author: barikata1984 <franche1984@gmail.com>
+Date:   Thu Dec 29 12:46:46 2022 -0500
+
+    36 add optax impoted, 136 disable flax.optim, 137 enable optax
+
+M	jaxnerf/train.py
+
+[33mcommit 8037c334f435136b4fb1930a0527e802a653a8af[m
+Author: Rose Yu <roseyu@google.com>
+Date:   Wed Dec 28 11:58:18 2022 -0800
+
+    added the message passing neural network implementation to support large-scale dataset.
+    
+    PiperOrigin-RevId: 498224349
+
+M	graph_temporal_ai/src/data.py
+M	graph_temporal_ai/src/lgf_model.py
+A	graph_temporal_ai/src/mpnn_cell.py
+A	graph_temporal_ai/src/mpnn_model.py
+M	graph_temporal_ai/src/utils.py
+A	graph_temporal_ai/trainer.py
+
+[33mcommit c072683b3c42a30f6f661fc4c6ab3cbaa39d3e3a[m
+Author: Rebecca Chen <rechen@google.com>
+Date:   Tue Dec 27 09:04:04 2022 -0800
+
+    Silence some pytype errors.
+    
+    PiperOrigin-RevId: 497980594
+
+M	aquadem/builder.py
+M	cubert/extended_javalang_tokenizer.py
+M	es_optimization/rl_environments.py
+M	func_dist/policy_learning/env_wrappers.py
+M	hypertransformer/tf/core/layerwise.py
+M	jrl/agents/batch_ensemble_msg/builder.py
+M	jrl/agents/bc/builder.py
+M	jrl/agents/cql/builder.py
+M	jrl/agents/msg/builder.py
+M	jrl/agents/snr/builder.py
+
+[33mcommit 1703ef253a0395df4d8bf60984ba0235f19b114d[m
+Author: Aida Davani <aidamd@google.com>
+Date:   Thu Dec 22 18:06:33 2022 -0800
+
+    code for paper: Dealing with disagreements: Looking beyond the majority vote in subjective annotations
+    
+    PiperOrigin-RevId: 497273565
+
+A	multi_annotator/README.md
+A	multi_annotator/classifier.py
+A	multi_annotator/multi_model.py
+A	multi_annotator/preprocess.py
+A	multi_annotator/requirements.txt
+A	multi_annotator/run.sh
+A	multi_annotator/run_annotators_modeling.py
+A	multi_annotator/utils.py
+
+[33mcommit f5e9ed314330cb7539f970f6fa67c5156f092050[m
+Author: Google Research Team <no-reply@google.com>
+Date:   Wed Dec 21 19:54:50 2022 -0800
+
+    Add the missing args.
+    
+    PiperOrigin-RevId: 497062446
+
+M	tf3d/layers/sparse_voxel_unet.py
+
+[33mcommit e730ea1dd1b62d09c37ef9885ad7f4cc8d8d0908[m
+Author: Peter Hawkins <phawkins@google.com>
+Date:   Wed Dec 21 17:23:13 2022 -0800
+
+    [NumPy] Remove references to deprecated NumPy type aliases.
+    
+    This change replaces references to a number of deprecated NumPy type aliases (np.bool, np.int, np.float, np.complex, np.object, np.str) with their recommended replacement (bool, int, float, complex, object, str).
+    
+    NumPy 1.24 drops the deprecated aliases, so we must remove uses before updating NumPy.
+    
+    PiperOrigin-RevId: 497041139
+
+M	assessment_plan_modeling/ap_parsing/data_lib.py
+M	automatic_structured_vi/make_surrogate_posteriors_test.py
+M	automl_zero/generate_datasets.py
+M	autoregressive_diffusion/utils/dynamic_programming.py
+M	batch_science/plot_utils.py
+M	bigg/bigg/model/tree_clib/tree_lib.py
+M	bigg/bigg/model/tree_model.py
+M	cluster_gcn/utils.py
+M	d3pm/text/utils.py
+M	dble/main_dble.py
+M	experience_replay/replay_memory/circular_replay_buffer.py
+M	felix/phrase_vocabulary_optimization_utils.py
+M	goemotions/analyze_data.py
+M	graph_embedding/dmon/synthetic_data/overlapping_gaussians.py
+M	hipi/envs/point_env.py
+M	hyperbolic_discount/replay_memory/circular_replay_buffer.py
+M	hypertransformer/tf/core/train_lib.py
+M	interpretability_benchmark/data_input.py
+M	jax_particles/jax_particles/renderer.py
+M	jaxsel/_src/synthetic_data.py
+M	proxy_rewards/movie_lens_simulator.py
+
+[33mcommit 1f7173d50a6d5d0736d661bdd18bd26cfda996a4[m
+Author: John Wieting <jwieting@google.com>
+Date:   Wed Dec 21 09:04:21 2022 -0800
+
+    Release README and checkpoint for VMSST.
+    
+    PiperOrigin-RevId: 496935100
+
+A	vmsst/README.md
+
+[33mcommit 7e23d54ec2a8530519c915c6bd694ec4fc729103[m
+Author: Sholto Douglas <sholto@google.com>
+Date:   Tue Dec 20 22:19:55 2022 -0800
+
+    Removing the copies between xmap stages by not folding back in to global form. (We initially did this to make testing against the pjit version easier).
+    
+    PiperOrigin-RevId: 496833140
+
+M	scaling_transformer_inference_efficiency/checkpoint.py
+M	scaling_transformer_inference_efficiency/incremental.py
+M	scaling_transformer_inference_efficiency/incremental_test_equivalency.py
+
+[33mcommit 570f6150ffa21b2b153eb14cf9e475942436eee0[m
+Author: Sholto Douglas <sholto@google.com>
+Date:   Tue Dec 20 22:07:06 2022 -0800
+
+    - Fixes and adds tests for 2D weight sharding with batch_sizes < Z_axis (i.e, batch size 1, which we omitted during the paper)
+    - I'll emphasise that I don't love my current solution here (requiring the user to specify that we are not using the typical partitioning pattern). Open for comments on better ways.
+    - Standardize naming in partitioning notation
+    - Adds tests for logit identicality (taken from a colab), these function as end-to-end integration tests
+    - Removes a number of references to XLA bugs we logged which have since been resolved
+    
+    PiperOrigin-RevId: 496831288
+
+M	scaling_transformer_inference_efficiency/incremental.py
+A	scaling_transformer_inference_efficiency/incremental_test_equivalency.py
+M	scaling_transformer_inference_efficiency/inference.py
+M	scaling_transformer_inference_efficiency/inference_test_equivalency.py
+M	scaling_transformer_inference_efficiency/layers/layers_pjit.py
+M	scaling_transformer_inference_efficiency/layers/two_d_parallel_xmap.py
+M	scaling_transformer_inference_efficiency/layers/two_d_parallel_xmap_test.py
+M	scaling_transformer_inference_efficiency/partitioning.py
+M	scaling_transformer_inference_efficiency/sampling.py
+M	scaling_transformer_inference_efficiency/weights.py
+
+[33mcommit 356f9644a09fd9bbf5731cca799a72b32ee2137f[m
+Author: Sholto Douglas <sholto@google.com>
+Date:   Tue Dec 20 17:59:14 2022 -0800
+
+    Introduces the option to stream output back to a console.
+    
+    ***
+    Add the option to pad out heads - so that we can shard over more chips when heads is fully sharded.
+    ***
+    Refactoring organisation of the folder.
+    
+    PiperOrigin-RevId: 496794335
+
+M	scaling_transformer_inference_efficiency/checkpoint.py
+M	scaling_transformer_inference_efficiency/checkpoint_test.py
+M	scaling_transformer_inference_efficiency/collectives.py
+M	scaling_transformer_inference_efficiency/collectives_test.py
+M	scaling_transformer_inference_efficiency/incremental.py
+M	scaling_transformer_inference_efficiency/inference.py
+M	scaling_transformer_inference_efficiency/inference_test.py
+M	scaling_transformer_inference_efficiency/inference_test_equivalency.py
+A	scaling_transformer_inference_efficiency/layers/layers_pjit.py
+R090	scaling_transformer_inference_efficiency/ablations/layers_serial.py	scaling_transformer_inference_efficiency/layers/layers_serial.py
+R091	scaling_transformer_inference_efficiency/ablations/partitioning_schemes.py	scaling_transformer_inference_efficiency/layers/one_d_parallel_xmap.py
+A	scaling_transformer_inference_efficiency/layers/two_d_parallel_xmap.py
+A	scaling_transformer_inference_efficiency/layers/two_d_parallel_xmap_oversharded.py
+R050	scaling_transformer_inference_efficiency/layers_parallel_test.py	scaling_transformer_inference_efficiency/layers/two_d_parallel_xmap_test.py
+D	scaling_transformer_inference_efficiency/layers_parallel.py
+R100	scaling_transformer_inference_efficiency/global_to_per_device.py	scaling_transformer_inference_efficiency/maps/shard_map.py
+R094	scaling_transformer_inference_efficiency/global_to_per_device_test.py	scaling_transformer_inference_efficiency/maps/shard_map_component_test.py
+M	scaling_transformer_inference_efficiency/maps/shard_map_test.py
+M	scaling_transformer_inference_efficiency/partitioning.py
+M	scaling_transformer_inference_efficiency/sampling.py
+R092	scaling_transformer_inference_efficiency/benchmark.py	scaling_transformer_inference_efficiency/usage/benchmarks.py
+R080	scaling_transformer_inference_efficiency/benchmark_test.py	scaling
