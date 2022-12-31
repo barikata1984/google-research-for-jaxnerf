@@ -33,8 +33,6 @@ from jaxnerf.nerf import datasets
 from jaxnerf.nerf import models
 from jaxnerf.nerf import utils
 
-import optax # added
-
 FLAGS = flags.FLAGS
 
 utils.define_flags()
@@ -132,10 +130,10 @@ def main(unused_argv):
   test_dataset = datasets.get_dataset("test", FLAGS)
 
   rng, key = random.split(rng)
-  model, variables = models.get_model(key, dataset.peek(), FLAGS)
-  #optimizer = flax.optim.Adam(FLAGS.lr_init).create(variables)
-  optimizer = optax.adam(FLAGS.lr_init).create(variables)
-  state = utils.TrainState(optimizer=optimizer)
+  model, variables = models.get_model(key, dataset.peek(), FLAGS) # model has a function called apply, which is apply_fn in train_state
+                                                                  # variables is a dict that has params as its member
+  optimizer = flax.optim.Adam(FLAGS.lr_init).create(variables)
+  state = utils.TrainState(optimizer=optimizer)                   # optimizer state == tx, and opt_state
   del optimizer, variables
 
   learning_rate_fn = functools.partial(
