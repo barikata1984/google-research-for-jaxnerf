@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# comment added to confirm the initial commit
+# add comment to confirm the initial commit
 
 #!/bin/bash
 CONFIG=$1
