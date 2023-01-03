@@ -23,7 +23,7 @@ from absl import flags
 import flax
 import optax # added
 from flax.metrics import tensorboard
-from flax.training import checkpoints
+from flax.training import checkpoints, train_state
 import jax
 from jax import config
 from jax import random
@@ -139,7 +139,7 @@ def main(unused_argv):
     lr_delay_mult=FLAGS.lr_delay_mult)
   
   tx = optax.adam(learning_rate=schedule) # tx means gradient transnformation
-  state = flax.training.train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=tx) # this instantiation works
+  state = train_state.TrainState.create(apply_fn=model.apply, params=variables["params"], tx=tx) # this instantiation works
   del tx, variables#, optimizer, params
 
   train_pstep = jax.pmap(
