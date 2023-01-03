@@ -16,10 +16,12 @@
 """Utility functions."""
 import collections
 import os
+import functools 
 from os import path
 from absl import flags
 import flax
-import flax.optim
+import optax
+from optax._src import base
 import jax
 import jax.numpy as jnp
 import jax.scipy as jsp
@@ -30,11 +32,6 @@ from jaxnerf.nerf import datasets
 
 BASE_DIR = "jaxnerf"
 INTERNAL = False
-
-
-@flax.struct.dataclass
-class TrainState:
-  optimizer: flax.optim.Optimizer
 
 
 @flax.struct.dataclass
@@ -386,14 +383,42 @@ def learning_rate_decay(step,
   """
   if lr_delay_steps > 0:
     # A kind of reverse cosine decay.
-    delay_rate = lr_delay_mult + (1 - lr_delay_mult) * np.sin(
-        0.5 * np.pi * np.clip(step / lr_delay_steps, 0, 1))
+    delay_rate = lr_delay_mult + (1 - lr_delay_mult) * jnp.sin(
+        0.5 * jnp.pi * jnp.clip(step / lr_delay_steps, 0, 1))
   else:
     delay_rate = 1.
-  t = np.clip(step / max_steps, 0, 1)
-  log_lerp = np.exp(np.log(lr_init) * (1 - t) + np.log(lr_final) * t)
+  t = jnp.clip(step / max_steps, 0, 1)
+  log_lerp = jnp.exp(jnp.log(lr_init) * (1 - t) + jnp.log(lr_final) * t)
+
   return delay_rate * log_lerp
 
+
+def create_learning_rate_decay_schedule(lr_init: float, 
+                                        lr_final: float, 
+                                        max_steps: float, 
+                                        lr_delay_steps: int = 0, 
+                                        lr_delay_mult: float = 1.
+) -> base.Schedule:
+  """Create a scheduling function that returns continuous learning rate decay 
+  using the learning_rate_decay defined above. 
+
+  Args:
+    lr_init: float, the initial learning rate.
+    lr_final: float, the final learning rate.
+    max_steps: int, the number of steps during optimization.
+    lr_delay_steps: int, the number of steps to delay the full learning rate.
+    lr_delay_mult: float, the multiplier on the rate when delaying it.
+
+  Returns:
+    schedule: base.Schedule, fuction that returns the learning rate for current 'step' following the description above.
+  """
+  return functools.partial(
+      learning_rate_decay, 
+      lr_init=lr_init, 
+      lr_final=lr_final, 
+      max_steps=max_steps, 
+      lr_delay_steps=lr_delay_steps, 
+      lr_delay_mult=lr_delay_mult)
 
 def shard(xs):
   """Split data into shards for multiple devices along the first dimension."""
